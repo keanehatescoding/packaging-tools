@@ -3,25 +3,25 @@
 # (c) 2000-2024 Bernhard Rosenkraenzer <bero@lindev.ch>
 
 SNAPSHOT=false
-while [ "`echo $1 |cut -b1`" = "-" ]; do
+while [ "$(echo "$1" | cut -b1)" = "-" ]; do
 	case "$1" in
-	-s|--snapshot)
+	-s | --snapshot)
 		SNAPSHOT=true
 		;;
-	-a|--autotools|--autoconf)
+	-a | --autotools | --autoconf)
 		BUILDSYS=autotools
 		;;
-	-b|--buildsys)
+	-b | --buildsys)
 		shift
 		BUILDSYS="$1"
 		;;
-	-c|--cmake)
+	-c | --cmake)
 		BUILDSYS=cmake
 		;;
-	-C|--custom-buildsys)
+	-C | --custom-buildsys)
 		BUILDSYS=custom
 		;;
-	-m|--meson)
+	-m | --meson)
 		BUILDSYS=meson
 		;;
 	esac
@@ -42,14 +42,17 @@ custom)
 	;;
 esac
 
-NAME=`echo $1 |sed -e "s/\.spec$//"`
+NAME=$(echo "$1" | sed -e "s/\.spec$//")
 [ -z "$EDITOR" ] && EDITOR="$VISUAL"
 if [ -z "$EDITOR" ]; then
 	if [ -e /usr/bin/vim ]; then
 		EDITOR=/usr/bin/vim
+	else
+		echo "Warning: vim not installed or \$EDITOR is not set!"
+		exit 1
 	fi
 fi
-ID="`cat /etc/passwd |grep "^$(id -un):" |cut -d: -f5` <`id -un`@`hostname |cut -d. -f2-`>"
+ID="$(cat /etc/passwd | grep "^$(id -un):" | cut -d: -f5) <$(id -un)@$(hostname | cut -d. -f2-)>"
 [ -e ~/.vs ] && source ~/.vs
 [ -z "$ABFDIR" ] && ABFDIR=~/abf
 
