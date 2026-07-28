@@ -1,6 +1,6 @@
 Summary:	Tools that make packagers' lives easier
 Name:		packaging-tools
-Version:	2.2.1
+Version:	2.2.2
 Release:	1
 License:	Public Domain
 Group:		Development/Other
@@ -34,6 +34,7 @@ BuildArch:	noarch
 Requires:	abb
 Requires:	abf-console-client
 Requires:	git-core
+Requires:	omv-cli
 # For gendiff
 Requires:	rpm
 
